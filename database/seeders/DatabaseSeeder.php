@@ -24,13 +24,13 @@ class DatabaseSeeder extends Seeder
          ]);
 
         \App\Models\Unit::create([
-            'name' => 'pill',
-            'code' => 'Таблетка',
+            'name' => 'таблетки',
+            'code' => 'pills',
         ]);
 
         \App\Models\Kit::create([
             'user_id' => 1,
-            'unit_id' => 1,
+            'unit_code' => "pills",
             'name' => 'Xanax',
             'amount' => 18,
         ]);

@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('measurements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('measurement_type_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->float('value');
-            $table->date('date');
-            $table->boolean('notifications_enabled');
+            $table->string('name');
+            $table->string('type');
             $table->timestamps();
         });
     }

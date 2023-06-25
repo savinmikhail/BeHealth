@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('name');
+//            $table->string('code')->unique();
+            $table->enum('code', ['mg', 'ml', 'pills'])->unique();
+            $table->enum('name', ['мг', 'мл', 'таблетки'])->unique();
+//            $table->string('name');
             $table->timestamps();
         });
     }

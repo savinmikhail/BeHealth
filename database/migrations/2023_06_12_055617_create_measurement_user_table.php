@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('properties', function (Blueprint $table) {
+        Schema::create('measurement_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('measurement_type_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('SYS');
-            $table->integer('DIA');
-            $table->integer('pulse');
-            $table->float('weight');
-            $table->float('temperature');
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('measurement_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('properties');
+        Schema::dropIfExists('measurement_types');
     }
 };

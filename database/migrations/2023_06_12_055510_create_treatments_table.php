@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('unit_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+//            $table->foreignId('unit_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+//            $table->foreignId('unit_code')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('unit_code')->constrained('units')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('kit_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->decimal('dose');
-            $table->string('comment');
+//            $table->string('comment');
+            $table->enum('comment', ['before', 'while', 'after'])->unique();
             $table->boolean('status');
             $table->timestamps();
         });

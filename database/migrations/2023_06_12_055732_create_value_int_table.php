@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('measurement_types', function (Blueprint $table) {
+        Schema::create('value_int', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('unit');
+            $table->foreignId('measurement_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('value');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('measurement_types');
+        Schema::dropIfExists('value_int');
     }
 };
