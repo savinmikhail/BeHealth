@@ -16,12 +16,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 //            $table->foreignId('unit_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 //            $table->foreignId('unit_code')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('unit_code')->constrained('units')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('unit_id')->constrained('units')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('kit_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->decimal('dose');
 //            $table->string('comment');
-            $table->enum('comment', ['before', 'while', 'after'])->unique();
+            $table->enum('comment', ['before', 'while', 'after']);
             $table->boolean('status');
             $table->timestamps();
         });

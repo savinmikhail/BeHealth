@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Kit::create([
             'user_id' => 1,
-            'unit_code' => "pills",
+            'unit_id' => 1,
             'name' => 'Xanax',
             'amount' => 18,
         ]);

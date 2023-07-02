@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 //            $table->foreignId('unit_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
 //            $table->foreignId('unit_code')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('unit_code')->constrained('units')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('unit_id')->constrained('units')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->decimal('amount');
             $table->timestamps();

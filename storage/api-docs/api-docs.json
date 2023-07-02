@@ -1,0 +1,647 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Be Health",
+        "contact": {
+            "email": "admin@example.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:82/api",
+            "description": "Laravel Swagger API Server"
+        }
+    ],
+    "paths": {
+        "/add-appointment": {
+            "post": {
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Create an appointment",
+                "description": "Create a new appointment",
+                "operationId": "7881e394b8e027bf3474f615f816bcc8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "specialist": {
+                                        "type": "string",
+                                        "example": "demiurge"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-07-01"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "18:25:43"
+                                    },
+                                    "place": {
+                                        "type": "string",
+                                        "example": "North hemisphere"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Appointment"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/treatment-amount/{treatment_id}": {
+            "get": {
+                "tags": [
+                    "Kit"
+                ],
+                "summary": "Get kit amount",
+                "description": "Retrieve the amount of a kit associated with a specific treatment",
+                "operationId": "213ddd92c4278b18f12f009a2021e65d",
+                "parameters": [
+                    {
+                        "name": "treatment_id",
+                        "in": "path",
+                        "description": "ID of the treatment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 1.23
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Treatment or kit not found"
+                    }
+                }
+            }
+        },
+        "/add-note": {
+            "post": {
+                "tags": [
+                    "Notes"
+                ],
+                "summary": "Create a note",
+                "description": "Create a new note",
+                "operationId": "05a296a766dcd9e2d297a4b56d512121",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "header": {
+                                        "type": "string",
+                                        "example": "Сходить к анестезиологу"
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "example": "Анестезиолог сказал, что мне не поможет наркоз, поэтому будут проводить операцию на живом"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Note"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/add-question": {
+            "post": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Create questions",
+                "description": "Create new questions",
+                "operationId": "2f836feb1c30187001e3e016bf229b64",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "questions": {
+                                        "type": "array",
+                                        "items": {
+                                            "allOf": [
+                                                {
+                                                    "required": [
+                                                        "appointment_id",
+                                                        "question"
+                                                    ],
+                                                    "properties": {
+                                                        "appointment_id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "question": {
+                                                            "type": "string",
+                                                            "example": "How to breathe?"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                {
+                                                    "required": [
+                                                        "appointment_id",
+                                                        "question"
+                                                    ],
+                                                    "properties": {
+                                                        "appointment_id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "question": {
+                                                            "type": "string",
+                                                            "example": "How to walk?"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Question"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/add-reception": {
+            "post": {
+                "tags": [
+                    "Reception"
+                ],
+                "summary": "Create reception",
+                "description": "Create a new reception",
+                "operationId": "ad899a82f21557cec8cceac9da54c80a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "treatment_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2023-07-01"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "format": "time",
+                                        "example": "18:25:43"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Reception"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/add-treatment": {
+            "post": {
+                "tags": [
+                    "Treatments"
+                ],
+                "summary": "Create treatment",
+                "description": "Create a new treatment",
+                "operationId": "e9aa2a45b983ed570f3f8026ac21c506",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "unit_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "kit_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Xanax"
+                                    },
+                                    "dose": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 1.5
+                                    },
+                                    "comment": {
+                                        "type": "string",
+                                        "example": "before"
+                                    },
+                                    "status": {
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Treatment"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Appointment": {
+                "required": [
+                    "id",
+                    "user_id",
+                    "specialist",
+                    "date",
+                    "time",
+                    "place"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "user_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "specialist": {
+                                "type": "string",
+                                "example": "demiurge"
+                            },
+                            "date": {
+                                "type": "string",
+                                "format": "date",
+                                "example": "2023-07-01"
+                            },
+                            "time": {
+                                "type": "string",
+                                "format": "time",
+                                "example": "18:25:43"
+                            },
+                            "place": {
+                                "type": "string",
+                                "example": "North hemisphere"
+                            }
+                        }
+                    }
+                ]
+            },
+            "User": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "User email",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "User password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Kit": {
+                "required": [
+                    "user_id",
+                    "unit_id",
+                    "name",
+                    "amount"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "user_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "unit_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Xanax"
+                            },
+                            "amount": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 18
+                            }
+                        }
+                    }
+                ]
+            },
+            "Note": {
+                "required": [
+                    "user_id",
+                    "header",
+                    "note"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "user_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "header": {
+                                "type": "string",
+                                "example": "header"
+                            },
+                            "note": {
+                                "type": "string",
+                                "example": "note"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Question": {
+                "required": [
+                    "appointment_id",
+                    "question"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "appointment_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "question": {
+                                "type": "string",
+                                "example": "Question 1"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Reception": {
+                "required": [
+                    "treatment_id",
+                    "date",
+                    "time"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "treatment_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "date": {
+                                "type": "string",
+                                "format": "date",
+                                "example": "2023-07-01"
+                            },
+                            "time": {
+                                "type": "string",
+                                "format": "time",
+                                "example": "18:25:43"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Treatment": {
+                "required": [
+                    "user_id",
+                    "unit_id",
+                    "kit_id",
+                    "name",
+                    "dose",
+                    "comment",
+                    "status"
+                ],
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    {
+                        "properties": {
+                            "user_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "unit_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "kit_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Xanax"
+                            },
+                            "dose": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 1.5
+                            },
+                            "comment": {
+                                "type": "string",
+                                "example": "before"
+                            },
+                            "status": {
+                                "type": "boolean",
+                                "example": true
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "securitySchemes": {
+            "X-APP-ID": {
+                "type": "apiKey",
+                "name": "X-APP-ID",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth description"
+        }
+    ]
+}
