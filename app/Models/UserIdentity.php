@@ -15,6 +15,8 @@ class UserIdentity extends Model
      */
     protected $fillable = [
      //   'email_verified_at',
+        'user_id',
+        'token',
         'password',
         'google_id',
         'remember_token',

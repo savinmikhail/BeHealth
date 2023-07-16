@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+
+Route::post('/user/create', [\App\Http\Controllers\UserController::class, 'create']);
+Route::post('/user/login', [\App\Http\Controllers\UserController::class, 'login']);
+Route::get('/user/show', [\App\Http\Controllers\UserController::class, 'show']);
+
+
 Route::post('/add-treatment', [\App\Http\Controllers\TreatmentController::class, 'store']);
 Route::post('/add-reception', [\App\Http\Controllers\ReceptionController::class, 'store']);
 Route::get('/treatment-amount/{treatment_id}', [\App\Http\Controllers\KitController::class, 'kitAmount']);
