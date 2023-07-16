@@ -393,6 +393,177 @@
                     }
                 }
             }
+        },
+        "/user/create": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a new user",
+                "description": "Create a new user and associated user identity",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "User data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "description": "The created user data",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "The validation error message",
+                                            "type": "string",
+                                            "example": "The validation error message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User login",
+                "description": "Authenticate a user using provided credentials",
+                "operationId": "loginUser",
+                "requestBody": {
+                    "description": "User name",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mikhail"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User authenticated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Success message",
+                                            "type": "string",
+                                            "example": "Signed in successfully"
+                                        },
+                                        "token": {
+                                            "description": "User token",
+                                            "type": "string",
+                                            "example": "jajhba34jhjkHN32JK12jnk"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "description": "Error message",
+                                            "type": "string",
+                                            "example": "The provided credentials do not match our records"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/show": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Display the specified user",
+                "description": "Display the specified user",
+                "operationId": "showUser",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "User",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -445,16 +616,11 @@
             },
             "User": {
                 "required": [
-                    "email",
-                    "password"
+                    "name"
                 ],
                 "properties": {
-                    "email": {
-                        "description": "User email",
-                        "type": "string"
-                    },
-                    "password": {
-                        "description": "User password",
+                    "name": {
+                        "description": "User name",
                         "type": "string"
                     }
                 },
@@ -628,6 +794,18 @@
                         }
                     }
                 ]
+            },
+            "StoreUserRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Mikhail"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {

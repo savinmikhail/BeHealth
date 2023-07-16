@@ -36,9 +36,8 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\Schema(
  *     schema="User",
  *      type="object",
- *      required={"email", "password"},
- *      @OA\Property( property="email", type="string", description="User email"),
- *      @OA\Property( property="password", type="string", description="User password")
+ *      required={"name"},
+ *      @OA\Property( property="name", type="string", description="User name"),
  * )
  */
 class Controller extends BaseController
